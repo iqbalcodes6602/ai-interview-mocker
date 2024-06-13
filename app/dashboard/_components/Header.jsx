@@ -1,22 +1,21 @@
 "use client"
-import { UserButton } from '@clerk/nextjs'
+import { UserButton, useUser } from '@clerk/nextjs'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 import React from 'react'
 
 function Header() {
-    const path = usePathname()
+    const { user } = useUser()
 
     return (
-        <div className='flex p-4 items-center justify-between bg-secondary shadow-sm'>
-            <Image src={'/logo.svg'} width={160} height={100} alt='logo' />
-            <ul className='hidden md:flex gap-6'>
-                <li className={`hover:text-primary font-bold transition-all cursor-pointer ${path=='/dashboard' && 'text-primary font-bold'}`} >Dashboard</li>
-                <li className={`hover:text-primary font-bold transition-all cursor-pointer ${path=='/questions' && 'text-primary font-bold'}`} >Questions</li>
-                <li className={`hover:text-primary font-bold transition-all cursor-pointer ${path=='/upgrade' && 'text-primary font-bold'}`} >Upgrade</li>
-                <li className={`hover:text-primary font-bold transition-all cursor-pointer ${path=='/how' && 'text-primary font-bold'}`} >How it works?</li>
-            </ul>
-            <UserButton />
+        <div className='flex p-4 items-center justify-around bg-secondary shadow-sm'>
+            <Link href='/dashboard'>
+                <h2 className='text-3xl font-bold text-primary flex gap-5'> <Image width={30} height={30} src={'/logo.png'} alt='logo' /> Mock AI InterView</h2>
+            </Link>
+            <div className='flex gap-5'>
+                <h2 className='text-md font-bold '>{user?.primaryEmailAddress?.emailAddress}</h2>
+                <UserButton />
+            </div>
         </div>
     )
 }

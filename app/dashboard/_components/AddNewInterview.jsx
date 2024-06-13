@@ -23,9 +23,9 @@ import { useRouter } from 'next/navigation'
 function AddNewInterview() {
   const { user } = useUser()
   const [openDialog, setOpenDialog] = useState(false)
-  const [jobPosition, setJobPosition] = useState('Full Stack Developer')
-  const [jobDescription, setJobDescription] = useState('React, Nodejs, Mysql, Firebase')
-  const [jobExperience, setJobExperience] = useState('10')
+  const [jobPosition, setJobPosition] = useState('')
+  const [jobDescription, setJobDescription] = useState('')
+  const [jobExperience, setJobExperience] = useState('')
   const [loading, setLoading] = useState(false)
   const [jsonResponse, setJsonResponse] = useState([])
 
