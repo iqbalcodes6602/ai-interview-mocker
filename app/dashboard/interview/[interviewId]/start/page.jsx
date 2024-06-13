@@ -5,6 +5,8 @@ import { eq } from 'drizzle-orm'
 import React, { useEffect, useState } from 'react'
 import QuestionsSections from './_components/QuestionsSections'
 import RecordAnswerSection from './_components/RecordAnswerSection'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 function StartInterview({ params }) {
   const [interviewData, setInterviewData] = useState()
@@ -28,7 +30,7 @@ function StartInterview({ params }) {
 
   return (
     <div>
-      <div className='grid gird-cols-1 md:grid-cols-2 gap-10'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-10 '>
         {/* Questions */}
         <QuestionsSections
           activeQuestionIndex={activeQuestionIndex}
@@ -36,7 +38,43 @@ function StartInterview({ params }) {
         />
 
         {/* video/ audio recording */}
-        <RecordAnswerSection />
+        <div className='mt-10'>
+          <div className='flex justify-between'>
+            <Button
+              disabled={activeQuestionIndex < 1}
+              variant='outline'
+              onClick={() => {
+                if (activeQuestionIndex > 0) {
+                  setActiveQuestionIndex(activeQuestionIndex - 1)
+                }
+              }}
+            >
+              Previous Question
+            </Button>
+
+            <Button
+              variant='outline'
+              disabled={activeQuestionIndex >= mockInterviewQuestions?.length - 1}
+              onClick={() => {
+                if (activeQuestionIndex < mockInterviewQuestions?.length - 1) {
+                  setActiveQuestionIndex(activeQuestionIndex + 1)
+                }
+              }}
+            >
+              Next Question
+            </Button>
+
+            <Link href={'/dashboard/interview/' + interviewData?.mockId + '/feedback'}>
+              <Button>End InterView</Button>
+            </Link>
+
+          </div>
+          <RecordAnswerSection
+            activeQuestionIndex={activeQuestionIndex}
+            mockInterviewQuestions={mockInterviewQuestions}
+            interviewData={interviewData}
+          />
+        </div>
       </div>
     </div>
   )
