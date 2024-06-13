@@ -5,6 +5,6 @@ export default {
     out: "./drizzle",
     verbose: true,
     dbCredentials: {
-        url: process.env.NEXT_PUBLIC_DATABASE_URL,
+        url: process.env.NEXT_PUBLIC_DRIZZLE_DATABASE_URL,
     }
 };
