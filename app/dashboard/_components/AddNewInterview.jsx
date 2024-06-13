@@ -18,6 +18,7 @@ import { MockInterview } from '@/utils/schema'
 import { v4 as uuidv4 } from 'uuid'
 import { useUser } from '@clerk/nextjs'
 import moment from 'moment';
+import { useRouter } from 'next/navigation'
 
 function AddNewInterview() {
   const { user } = useUser()
@@ -27,6 +28,8 @@ function AddNewInterview() {
   const [jobExperience, setJobExperience] = useState('10')
   const [loading, setLoading] = useState(false)
   const [jsonResponse, setJsonResponse] = useState([])
+
+  const router = useRouter()
 
   useEffect(() => { 
     console.log(moment().format('DD-MM-YYYY'))
@@ -61,6 +64,7 @@ function AddNewInterview() {
 
       if(resp){
         setOpenDialog(false)
+        router.push('/dashboard/interview/'+resp[0]?.mockId)
       }
     } else {
       console.log('Error in response')
