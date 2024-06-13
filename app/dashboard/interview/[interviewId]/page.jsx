@@ -2,12 +2,14 @@
 import { Button } from '@/components/ui/button'
 import { db } from '@/utils/db'
 import { MockInterview } from '@/utils/schema'
-import { eq } from 'drizzle-orm'
+import { eq} from 'drizzle-orm'
 import { Lightbulb, WebcamIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import Webcam from 'react-webcam'
 
 function Interview({ params }) {
+    const router = useRouter()
 
     const [interviewData, setInterviewData] = useState()
     const [webCamEnabled, setWebCamEnabled] = useState(false)
@@ -58,7 +60,7 @@ function Interview({ params }) {
                             <WebcamIcon className='h-72 w-full my-7  p-20 bg-secondary rounded-lg border' />
                             <div className='flex gap-4 justify-between'>
                                 <Button variant='outline' className="w-[75%]" onClick={() => setWebCamEnabled(true)}>Enable Webcam and Microphone</Button>
-                                <Button className="w-[25%]">Start Interview</Button>
+                                <Button onClick={() => { router.push('/dashboard/interview/' + params.interviewId + '/start') }} className="w-[25%]">Start Interview</Button>
                             </div>
                         </>
                     }
