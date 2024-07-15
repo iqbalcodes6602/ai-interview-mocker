@@ -32,7 +32,7 @@ function AddNewInterview() {
   const router = useRouter()
 
   useEffect(() => { 
-    console.log(moment().format('DD-MM-YYYY'))
+    // console.log(moment().format('DD-MM-YYYY'))
   }, [])
 
   const onSubmit = async (e) => {
@@ -41,12 +41,12 @@ function AddNewInterview() {
 
     const InputPromt = `Job Position: ${jobPosition}, Job Description: ${jobDescription}, Years of Experience: ${jobExperience}, Depends on this information please give me ${process.env.NEXT_PUBLIC_INTERVIEW_QUESTION_COUNT} Interview question with Answered in Json Format, Give Question and Answer in Json`
 
-    console.log('InputPromt:', InputPromt)
+    // console.log('InputPromt:', InputPromt)
 
     const result = await chatSession.sendMessage(InputPromt)
     const MockJsonResp = (result.response.text())
       .replace('```json', '').replace('```', '')
-    console.log(JSON.parse(MockJsonResp))
+    // console.log(JSON.parse(MockJsonResp))
     setJsonResponse(MockJsonResp)
 
     if (MockJsonResp) {
@@ -60,14 +60,14 @@ function AddNewInterview() {
         createdAt: moment().format('DD-MM-YYYY')
       }).returning({ mockId: MockInterview.mockId })
 
-      console.log("inserted id: ", resp)
+      // console.log("inserted id: ", resp)
 
       if(resp){
         setOpenDialog(false)
         router.push('/dashboard/interview/'+resp[0]?.mockId)
       }
     } else {
-      console.log('Error in response')
+      // console.log('Error in response')
     }
 
     setLoading(false)

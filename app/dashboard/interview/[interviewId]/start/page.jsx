@@ -20,12 +20,12 @@ function StartInterview({ params }) {
   const GetInterviewDetails = async () => {
     const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, params.interviewId))
 
-    console.log('#########', result)
+    // console.log('#########', result)
     setInterviewData(result[0]);
 
     const jsonMockResp = JSON.parse(result[0].jsonMockResp)
     setMockInterviewQuestions(jsonMockResp)
-    console.log('jsonMockResp:', jsonMockResp)
+    // console.log('jsonMockResp:', jsonMockResp)
   }
 
   return (

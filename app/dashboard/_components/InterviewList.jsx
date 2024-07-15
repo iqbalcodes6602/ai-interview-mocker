@@ -21,7 +21,7 @@ function InterviewList() {
             .where(eq(MockInterview.createdBy, user?.primaryEmailAddress?.emailAddress))
             .orderBy(desc(MockInterview.id))
 
-        console.log('result', result)
+        // console.log('result', result)
         setInterviewList(result)
     }
     return (

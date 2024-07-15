@@ -13,7 +13,9 @@ function Header() {
                 <h2 className='text-3xl font-bold text-primary flex gap-5'> <Image width={30} height={30} src={'/logo.png'} alt='logo' /> Mock AI InterView</h2>
             </Link>
             <div className='flex gap-5'>
-                <h2 className='text-md font-bold '>{user?.primaryEmailAddress?.emailAddress}</h2>
+                <h2 className='hidden md:flex text-md font-bold '>
+                    {user?.primaryEmailAddress?.emailAddress}
+                </h2>
                 <UserButton />
             </div>
         </div>

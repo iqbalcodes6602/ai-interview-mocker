@@ -29,7 +29,7 @@ function Feedback({ params }) {
       .where((eq(UserAnswer.mockIdRef, params.interviewId)))
       .orderBy(UserAnswer.id)
 
-    console.log('result eeeeeeeeeeeeeeeeeee', result)
+    // console.log('result eeeeeeeeeeeeeeeeeee', result)
     setFeedbackList(result)
   }
 

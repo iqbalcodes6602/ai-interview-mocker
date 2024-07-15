@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { db } from '@/utils/db'
 import { MockInterview } from '@/utils/schema'
-import { eq} from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 import { Lightbulb, WebcamIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -15,7 +15,7 @@ function Interview({ params }) {
     const [webCamEnabled, setWebCamEnabled] = useState(false)
 
     useEffect(() => {
-        console.log(params.interviewId)
+        // console.log(params.interviewId)
 
         GetInterviewDetails()
     }, [])
@@ -23,11 +23,11 @@ function Interview({ params }) {
     const GetInterviewDetails = async () => {
         const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, params.interviewId))
 
-        console.log('#########', result)
+        // console.log('#########', result)
         setInterviewData(result[0]);
     }
     useEffect(() => {
-        console.log('Interview Data:', interviewData)
+        // console.log('Interview Data:', interviewData)
     }, [interviewData])
 
     return (
@@ -47,15 +47,23 @@ function Interview({ params }) {
                 </div>
                 <div>
                     {webCamEnabled ?
-                        <Webcam
-                            onUserMedia={() => setWebCamEnabled(true)}
-                            onUserMediaError={() => setWebCamEnabled(true)}
-                            mirrored={true}
-                            style={{
-                                height: 300,
-                                width: 300,
-                            }}
-                        /> :
+                        <>
+                            <Webcam
+                                className='my-7 bg-secondary rounded-lg border'
+                                onUserMedia={() => setWebCamEnabled(true)}
+                                onUserMediaError={() => setWebCamEnabled(true)}
+                                mirrored={true}
+                                // style={{
+                                //     height: 300,
+                                //     width: 300,
+                                // }}
+                            />
+                            <div className='flex gap-4 justify-between'>
+                                <Button variant='outline' className="w-[75%]" onClick={() => setWebCamEnabled(false)}>Disable Webcam and Microphone</Button>
+                                <Button onClick={() => { router.push('/dashboard/interview/' + params.interviewId + '/start') }} className="w-[25%]">Start Interview</Button>
+                            </div>
+                        </>
+                        :
                         <>
                             <WebcamIcon className='h-72 w-full my-7  p-20 bg-secondary rounded-lg border' />
                             <div className='flex gap-4 justify-between'>
